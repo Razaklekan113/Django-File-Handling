@@ -1,0 +1,35 @@
+{% extends "file/base.html" %}
+
+{% block content %}
+<div class="p-8 flex flex-col items-center w-full max-w-screen-2xl mx-auto">
+    <a class="text-blue-600 tracking-normal mb-4" href="{% url 'upload_form' %}">Add File</a>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {% for file in files %}
+        <div class="p-4">
+            <div class="rounded overflow-hidden shadow-lg">
+                <img class="w-full h-64 object-cover" src="{{ file.image.url }}" alt="{{ file.name }}">
+                <div class="px-6 py-4">
+                    <div class="font-bold text-2xl mb-2">{{ file.name }}</div>
+                    <p class="text-gray-700 text-lg">awesome</p>
+                    <p>size (bytes): {{file.image.size}}</p>
+                    <p>Width : {{file.image.width}}</p>
+                    <p>Height : {{file.image.height}}</p>
+                </div>
+
+                <div class="mt-4">
+                    <button class="bg-blue-500 hover:big-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+                        <a href="{% url 'delete_file' file.pk %}">
+                            Delete File
+                        </a>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+
